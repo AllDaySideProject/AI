@@ -1,5 +1,8 @@
 import os # 환경변수 읽어올 수 있도록 os 모델 임포트
 from functools import lru_cache
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @lru_cache # settings() 함수에 붙여 환경변수 값을 계속 유지
 def settings():

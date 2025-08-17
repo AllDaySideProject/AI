@@ -1,14 +1,20 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
+
+from app.core.ApiResponse import Envelope, ok
 from app.services.prompt import chatForTip
 import json
 
 router = APIRouter(prefix="/tip")
+
+class TipItem(BaseModel):
+    title: str
+    content: str
 class TipRequest(BaseModel):
     menus: List[str]
 
-@router.post("")
+@router.post("", response_model=Envelope[List[TipItem]])
 def getTip(req: TipRequest):
     try:
         system = """너는 남은 반찬을 새롭게 조리해서 먹는 법을 알려주는 식사 코치야.
@@ -37,7 +43,9 @@ def getTip(req: TipRequest):
         text = chatForTip(messages, temperature=0.6, max_tokens=400)
 
         obj = json.loads(text)
-        return obj["items"]
+        items =  obj["items"]
+
+        return ok(items, http_status=200) 
 
     except Exception as e:
         raise HTTPException(status_code=502, detail=str(e))

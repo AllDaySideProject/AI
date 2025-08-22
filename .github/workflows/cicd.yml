@@ -62,3 +62,5 @@ jobs:
               -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
               -e OPENAI_MODEL=${{ secrets.OPENAI_MODEL }} \
               ${{ env.IMAGE }}:latest
+            
+            docker image prune -af || true

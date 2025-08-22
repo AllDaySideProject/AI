@@ -2,10 +2,10 @@ from fastapi import FastAPI, HTTPException
 from pydantic import ValidationError
 from contextlib import asynccontextmanager
 
-from app.domain.recommend.service import loader
-from app.domain.tip.api import tip_api
-from app.domain.recommend.api import recommend_api
-from app.core.exception.global_error_handler import (
+from leftovers.domain.recommend.service import loader
+from leftovers.domain.tip.api import tip_api
+from leftovers.domain.recommend.api import recommend_api
+from leftovers.core.exception.global_error_handler import (
     validation_error_handler,
     http_exception_handler,
     global_exception_handler,

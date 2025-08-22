@@ -1,5 +1,5 @@
-from app.core.external.open_ai_client import client
-from app.core.config.config import settings
+from leftovers.core.external.open_ai_client import client
+from leftovers.core.config.config import settings
 
 # OpenAI Responses API의 structured outputs 기능에서 쓰는 JSON Schema
 # TIp SCHEMA의 형태로 응답을 제공함

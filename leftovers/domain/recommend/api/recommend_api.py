@@ -1,8 +1,8 @@
 from fastapi import APIRouter
-from app.core.response.api_response import Envelope, ok, fail
-from app.domain.recommend.schemas.recommend_request import RecommendReq
-from app.domain.recommend.schemas.recommend_response import RecommendRes
-from app.domain.recommend.service import evaluator, loader
+from leftovers.core.response.api_response import Envelope, ok, fail
+from leftovers.domain.recommend.schemas.recommend_request import RecommendReq
+from leftovers.domain.recommend.schemas.recommend_response import RecommendRes
+from leftovers.domain.recommend.service import evaluator, loader
 
 router = APIRouter(prefix="/menus")
 

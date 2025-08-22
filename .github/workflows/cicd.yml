@@ -45,7 +45,6 @@ jobs:
     name: Deploy to Server
     needs: docker-build-push
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Deploy via SSH

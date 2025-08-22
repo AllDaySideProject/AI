@@ -1,7 +1,7 @@
 import numpy as np
-from app.domain.recommend.service.scoring import compute_score
-from app.domain.recommend.schemas.recommend_response import MatchItem
-from app.domain.recommend.service import loader, matcher
+from leftovers.domain.recommend.service.scoring import compute_score
+from leftovers.domain.recommend.schemas.recommend_response import MatchItem
+from leftovers.domain.recommend.service import loader, matcher
 
 # 음식 영양 성분을 딕셔너리에서 numpy 배열로 변환(ML 모델 입력은 항상 숫자여야 하므로)
 def to_feat(n: dict) -> np.ndarray:

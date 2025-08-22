@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
 
-from app.core.response.api_response import Envelope, ok
-from app.domain.tip.schemas.tip_request import TipRequest
-from app.domain.tip.schemas.tip_response import TipItem
-from app.domain.tip.service.prompt import chatForTip
+from leftovers.core.response.api_response import Envelope, ok
+from leftovers.domain.tip.schemas.tip_request import TipRequest
+from leftovers.domain.tip.schemas.tip_response import TipItem
+from leftovers.domain.tip.service.prompt import chatForTip
 
 import json
 from json import JSONDecodeError

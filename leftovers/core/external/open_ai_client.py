@@ -1,5 +1,5 @@
 from openai import OpenAI
-from app.core.config.config import settings # 환경설정 로더 가져오기
+from leftovers.core.config.config import settings # 환경설정 로더 가져오기
 
 _cfg = settings() # settings
 

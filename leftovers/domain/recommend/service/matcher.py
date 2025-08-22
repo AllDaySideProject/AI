@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from app.domain.recommend.service import loader
+from leftovers.domain.recommend.service import loader
 
 # 메뉴 이름이 유사한 것 찾기
 def match_top1(query: str):

@@ -1,10 +1,10 @@
 from typing import List
 import joblib
 
-from app.domain.recommend.service.food_kfda_loader import load_kfda_excels
+from leftovers.domain.recommend.service.food_kfda_loader import load_kfda_excels
 
-FOOD_FILES = ["app/domain/recommend/data/foodData1.xlsx", "app/domain/recommend/data/foodData2.xlsx"]
-MODEL_DIR = "app/domain/recommend/model_store"
+FOOD_FILES = ["leftovers/domain/recommend/data/foodData1.xlsx", "leftovers/domain/recommend/data/foodData2.xlsx"]
+MODEL_DIR = "leftovers/domain/recommend/model_store"
 
 # 컨셉
 CONCEPTS = {"diet", "keto", "low_sodium", "glycemic", "bulking"}

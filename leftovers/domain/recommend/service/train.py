@@ -8,11 +8,11 @@ from sklearn.linear_model import RidgeCV
 from sklearn.metrics import mean_absolute_error
 from sklearn.impute import SimpleImputer
 
-from app.domain.recommend.service.food_kfda_loader import load_kfda_excels
-from app.domain.recommend.service.scoring import fit_calibration, compute_score
+from leftovers.domain.recommend.service.food_kfda_loader import load_kfda_excels
+from leftovers.domain.recommend.service.scoring import fit_calibration, compute_score
 
-FOOD_FILES = ["app/domain/recommend/data/foodData1.xlsx", "app/domain/recommend/data/foodData2.xlsx"]
-MODEL_DIR = Path("app/domain/recommend/model_store")
+FOOD_FILES = ["leftovers/domain/recommend/data/foodData1.xlsx", "leftovers/domain/recommend/data/foodData2.xlsx"]
+MODEL_DIR = Path("leftovers/domain/recommend/model_store")
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 # 컨셉

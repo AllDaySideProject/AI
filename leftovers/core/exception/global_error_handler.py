@@ -2,7 +2,7 @@ from fastapi import Request, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
-from app.core.response.api_response import fail
+from leftovers.core.response.api_response import fail
 
 # 공통 응답 포맷 생성기
 def error_response(status: int, message: str, extra: dict = None):

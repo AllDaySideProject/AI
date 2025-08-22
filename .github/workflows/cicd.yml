@@ -37,6 +37,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          no-cache: true
           tags: |
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ github.sha }}
@@ -45,7 +46,6 @@ jobs:
     name: Deploy to Server
     needs: docker-build-push
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Deploy via SSH
@@ -63,3 +63,5 @@ jobs:
               -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
               -e OPENAI_MODEL=${{ secrets.OPENAI_MODEL }} \
               ${{ env.IMAGE }}:latest
+            
+            docker image prune -af || true

@@ -7,5 +7,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN python -m app.domain.recommend.service.train
+RUN python -m leftovers.domain.recommend.service.train
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -17,7 +17,6 @@ import asyncio
 async def lifespan(app: FastAPI):
     loop = asyncio.get_event_loop()
     await loop.run_in_executor(None, loader.load_all)  
-    loader.load_all()
     print("모델/DB 로딩 완료")
 
     yield # 여기까지 오면 서버 실행

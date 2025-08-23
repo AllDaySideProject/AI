@@ -13,8 +13,7 @@ def recommend(req: RecommendReq):
     if req.concept not in loader.CONCEPTS: # 컨셉명이 올바르지 않으면 400 에러
         return fail(400, {"message": f"알 수 없는 컨셉: {req.concept}"}).model_dump()
 
-    # 요청 메뉴를 돌면서 evaluate_item 호출
-    items = [evaluator.evaluate_item(req.concept, a) for a in req.items]
+    items = evaluator.evaluate_items(req.concept, req.items)
     ranked = [r for r in items if r.matched_name] # 이름이 매칭되지 않으면 제외
     ranked.sort(key=lambda r: (r.suitability, r.similarity), reverse=True) # 적합도와 유사도가 높은 순으로 정렬
     topn = ranked[: max(1, int(req.count))] # 요청한 개수만큼만 반환

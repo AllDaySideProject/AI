@@ -13,16 +13,16 @@ CONCEPTS = {"diet", "keto", "low_sodium", "glycemic", "bulking"}
 _DB_ROWS: List[dict] = [] # 음식 데이터
 _NAME_LIST: List[str] = [] # 음식 이름 리스트
 _NAME_VEC = None # 음식 이름 벡터화(음식 이름 문자열을 숫자 벡터로 변환)
-_NAME_MAT = None # 벡터화 결과 저장소(매트릭스)
+_NAME_MAT = None # 벡터화 결과 저장소(매트릭스) : 유사도 계산 전체 돌릴 때 사용
+_NAME_LOOKUP = {} # 벡터화 결과 딕셔너리 : 메뉴가 DB에 있는 경우, 그 벡터만 필요할 때 사용
 _IMPUTER = None # 결측치를 적절한 값으로 채워주는 보간기
 _SCALER = None # 값들의 크기를 일정한 값으로 맞춰주는 도구
 _MODELS = {} # 컨셉별 ML 모델
 _CALIB = None # 점수 보정기
 
-
 # 캐시에 DB와 모델 전부 로딩
 def load_all():
-    global _DB_ROWS, _NAME_LIST, _NAME_VEC, _NAME_MAT, _IMPUTER, _SCALER, _MODELS, _CALIB
+    global _DB_ROWS, _NAME_LIST, _NAME_VEC, _NAME_MAT, _IMPUTER, _SCALER, _MODELS, _CALIB, _NAME_LOOKUP
     
     _DB_ROWS = load_kfda_excels(FOOD_FILES, sheet_name=None)
 
@@ -30,6 +30,7 @@ def load_all():
     _NAME_MAT = joblib.load(f"{MODEL_DIR}/name_matrix.joblib")
     _NAME_LIST = joblib.load(f"{MODEL_DIR}/name_list.joblib")
 
+    _NAME_LOOKUP = {name: vec for name, vec in zip(_NAME_LIST, _NAME_MAT)}
 
     _IMPUTER = joblib.load(f"{MODEL_DIR}/nutrition_imputer.joblib")
     _SCALER  = joblib.load(f"{MODEL_DIR}/nutrition_scaler.joblib")

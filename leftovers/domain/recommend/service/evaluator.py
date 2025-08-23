@@ -36,10 +36,12 @@ def evaluate_items(concept: str, menus: list[str]) -> list[MatchItem]:
         features.append(x_num)
     
     valid_idx = [i for i, f in enumerate(features) if f is not None] # 매칭 실패 제거하고 batch 변환
+    
     if not valid_idx:
         return matched  # 전부 실패면 그대로 반환
+    
+    X = loader._DB_FEATS[[m[-1] for m in matched if not isinstance(m, MatchItem)]] # dict -> numpy 변환 대신 캐시된 _DB_FEATS 사용
 
-    X = np.stack([features[i] for i in valid_idx])  # (N, d) 행렬
     X = loader._IMPUTER.transform(X) # 결측치 보간
     X = loader._SCALER.transform(X) # 모델 학습 범위에 맞게 정규화
 

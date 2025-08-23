@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import linear_kernel
 from leftovers.domain.recommend.service import loader
 
 # 메뉴 이름이 유사한 것 찾기
@@ -8,7 +9,7 @@ def match_top1(query: str):
         return (-1, "", 0.0) # 매칭 실패
     
     query_vector = loader._NAME_VEC.transform([str(query)]) # 문자열을 벡터로 변환
-    similarity_list = cosine_similarity(query_vector, loader._NAME_MAT).ravel() # 코사인 유사도(두 벡터 간의 유사도) 측정
+    similarity_list = linear_kernel(query_vector, loader._NAME_MAT).ravel() # 두 벡터 간의 유사도 측정
     idx = int(np.argmax(similarity_list)) # 가장 높은 유사도를 가진 인덱스
     similarity = float(similarity_list[idx])
 

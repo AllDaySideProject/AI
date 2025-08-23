@@ -1,6 +1,7 @@
 from typing import List
 import joblib
 import numpy as np
+import hnswlib
 
 from leftovers.domain.recommend.service.food_kfda_loader import load_kfda_excels
 from leftovers.domain.recommend.service.evaluator import to_feat
@@ -23,6 +24,8 @@ _SCALER = None # 값들의 크기를 일정한 값으로 맞춰주는 도구
 _MODELS = {} # 컨셉별 ML 모델
 _CALIB = None # 점수 보정기
 
+_HNSW_INDEX = None # ANN 인덱스
+
 # 캐시에 DB와 모델 전부 로딩
 def load_all():
     global _DB_ROWS, _DB_FEATS
@@ -39,6 +42,14 @@ def load_all():
     _NAME_MAT = joblib.load(f"{MODEL_DIR}/name_matrix.joblib")
     _NAME_LIST = joblib.load(f"{MODEL_DIR}/name_list.joblib")
     _NAME_LOOKUP = {name: vec for name, vec in zip(_NAME_LIST, _NAME_MAT)}
+
+    # HNSW 인덱스 구축
+    dim = _NAME_MAT.shape[1]
+    _HNSW_INDEX = hnswlib.Index(space='cosine', dim=dim)
+    _HNSW_INDEX.init_index(max_elements=_NAME_MAT.shape[0],
+                           ef_construction=200, M=16)
+    _HNSW_INDEX.add_items(_NAME_MAT.astype(np.float32))
+    _HNSW_INDEX.set_ef(50)
 
     # 영양성분 전처리기
     _IMPUTER = joblib.load(f"{MODEL_DIR}/nutrition_imputer.joblib")

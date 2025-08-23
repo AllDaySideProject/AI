@@ -32,7 +32,7 @@ def evaluate_items(concept: str, menus: list[str]) -> list[MatchItem]:
         b_row["name"] = b_name
 
         x_num = to_feat(b_row) # 피쳐 추출
-        matched.append((menu, b_name, sim, b_row))  # 후처리용
+        matched.append((menu, b_name, sim, b_row, idx))  # 후처리용
         features.append(x_num)
     
     valid_idx = [i for i, f in enumerate(features) if f is not None] # 매칭 실패 제거하고 batch 변환
@@ -54,7 +54,7 @@ def evaluate_items(concept: str, menus: list[str]) -> list[MatchItem]:
         if isinstance(m, MatchItem):  # 매칭 실패
             results.append(m)
         else:
-            menu, b_name, sim, b_row = m
+            menu, b_name, sim, b_row, idx = m
             pred = float(preds[pred_i])
             rule = float(compute_score(concept, b_row, loader._CALIB or None))
             fused = 0.3 * pred + 0.7 * rule

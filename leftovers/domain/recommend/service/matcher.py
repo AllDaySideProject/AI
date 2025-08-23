@@ -8,6 +8,11 @@ def match_top1(query: str):
     if not loader._NAME_LIST: # 로딩된 메뉴가 없을 경우
         return (-1, "", 0.0) # 매칭 실패
     
+    if query in loader._NAME_LOOKUP: # 입력이 DB에 있는 경우 transform 스킵
+        query_vector = loader._NAME_LOOKUP[query]
+    else:
+        query_vector = loader._NAME_VEC.transform([str(query)])
+    
     query_vector = loader._NAME_VEC.transform([str(query)]) # 문자열을 벡터로 변환
     similarity_list = linear_kernel(query_vector, loader._NAME_MAT).ravel() # 두 벡터 간의 유사도 측정
     idx = int(np.argmax(similarity_list)) # 가장 높은 유사도를 가진 인덱스

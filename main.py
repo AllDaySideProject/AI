@@ -15,6 +15,7 @@ import asyncio
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    print("loop 진입")
     loop = asyncio.get_event_loop()
     await loop.run_in_executor(None, loader.load_all)  
     print("모델/DB 로딩 완료")

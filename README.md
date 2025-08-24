@@ -18,6 +18,7 @@ FastAPI 기반의 **AI 추천 서버**로, 식약처 영양성분표 데이터�
 ---
 
 ## 🚀 Tech Stack
+<img width="1045" height="844" alt="struct-be" src="https://github.com/user-attachments/assets/a10dd991-3e69-46dc-8eb0-152d27e3c1e4" />
 
 ### 🔹 Framework & Language
 - **Python 3.11**
@@ -86,7 +87,7 @@ FastAPI 기반의 **AI 추천 서버**로, 식약처 영양성분표 데이터�
 
 5. **추천 결과 반환**
 
-   * 점수(0\~100) 기반 랭킹 → 상위 N개 반환
+   * 점수(0\~100) 기반 랭킹 -> 상위 N개 반환
    * 응답 구조: `isSuccess`, `httpStatus`, `data`, `timeStamp`
 
 ---

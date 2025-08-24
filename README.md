@@ -1,99 +1,118 @@
-# ✨Project Convention✨
+# 🤖 잔반플러팅 AI
+
+FastAPI 기반의 **AI 추천 서버**로, 식약처 영양성분표 데이터를 기반으로
+**맞춤형 반찬 추천**과 **섭취 팁 제공**을 담당합니다.
+
+### 🔹 AI 기능
+
+* **메뉴 추천**
+
+  * 5가지 콘셉트 기반:
+    `diet(다이어트)`, `keto(저탄고지)`, `low_sodium(저염)`, `glycemic(혈당)`, `bulking(벌크업)`
+  * 입력 메뉴명 -> 유사도 매칭 -> 영양 성분 피처화 -> 콘셉트별 점수화(0\~100)
+
+* **Tip 생성**
+
+  * OpenAI API 연동을 통한 **식습관 가이드 / 레시피 제안**
+
 ---
 
-<br>
- 
-## ✉️ Commit Convention
+## 🚀 Tech Stack
 
-커밋 메시지는 **Udacity 스타일**을 사용하며, 다음과 같은 구조로 작성
+### 🔹 Framework & Language
+- **Python 3.11**
+- **FastAPI : 경량 웹 프레임워크**
+- **Uvicorn : ASGI 서버**
 
-```
-type: Subject (제목)
-
-body (본문) (긴 설명이 필요한 경우에 작성)
-
-footer  (꼬리말) (issue tracker ID를 명시하고 싶은 경우에 작성)
-```
-<br>
+<img src="https://img.shields.io/badge/Python%203.11-3776AB?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white"/> <img src="https://img.shields.io/badge/Uvicorn-499848?style=flat-square&logo=python&logoColor=white"/>
 
 
-### 🛠 **type**: 커밋의 유형
 
-| 타입       | 설명                                           |
-|------------|------------------------------------------------|
-| `feat`     | ✨ 새로운 기능 추가                               |
-| `fix`      | 🐛 버그 수정                                      |
-| `docs`     | 📝 문서 수정 (README, 주석 등)                    |
-| `style`    | 💄 코드 포맷팅, 세미콜론 누락 등 기능 영향 없는 변경 |
-| `refactor` | ♻️ 코드 리팩토링 (기능 변화 없음)                |
-| `test`     | ✅ 테스트 코드 추가 또는 수정                    |
-| `chore`    | 🔧 빌드 설정, 패키지 매니저 설정 등 기타 작업     |
-| `perf`     | ⚡ 성능 개선                                      |
-| `ci`       | 🔄 CI 관련 설정 및 스크립트 수정                 |
-| `revert`   | ⚙️ 이전 커밋 되돌리기                            |
-
-<br>
-
-### 🖊️ **Subject**: 제목
-
-- 50자 이내로 간결하게 작성
-- 마침표(`.`) 금지
-- 과거 시제 X, 명령어 사용
-
-<br>
-
-### 📝 **Body**: 본문
-
-- **선택 사항**
-- 제목에서 설명할 수 없는 추가 정보를 제공
-- "무엇을"과 "왜"를 중심으로 상세히 기술
-- 한 줄당 72자 이내로 작성
-- 필요시 Markdown 사용 가능
+### 🔹 Data / ML
+- **scikit-learn : 벡터화, 차원 축소, 스케일링, 결측치 보정**
+- **hnswlib : 근접 탐색 (메뉴명 유사도 매칭)**
+- **numpy / joblib : 수치 연산 및 모델 직렬화**
+-**식약처 영양성분표 데이터 (Excel/CSV) : 영양 정보 기반 학습/추천**
+  
+<img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white"/> <img src="https://img.shields.io/badge/hnswlib-333333?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/numpy-013243?style=flat-square&logo=numpy&logoColor=white"/> <img src="https://img.shields.io/badge/joblib-333333?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/%EC%8B%9D%EC%95%BD%EC%B2%98%20%EC%98%81%EC%96%91%EC%84%B1%EB%B6%84%ED%91%9C-0052CC?style=flat-square&logo=google-spreadsheet&logoColor=white"/>
 
 
 ---
-<br>
 
-
-## 🌿 Git Flow 브랜치 전략 (with `main`) 🌿
-
-
-### 🌴 기본 브랜치
-| 브랜치 | 역할 |
-|--------|------|
-| `main`     | 최종 배포용 브랜치 (stable) |
-| `develop`  | 다음 배포를 위한 통합 개발 브랜치 |
-
-<br>
-
-### 🌱 **작업 브랜치 네이밍 규칙**
-
-```
-type/#issue번호  (작업 단위는 기능/수정/리팩토링 등으로 구분)
-``` 
-
-
-| prefix       | 설명                         | 예시                              |
-|--------------|------------------------------|-----------------------------------|
-| `feature/`   | ✨ 새로운 기능 개발             | `feature/#15`           |
-| `fix/`       | 🐛 버그 수정                    | `fix/#42`     |
-| `refactor/`  | ♻️ 코드 리팩토링                | `refactor/#23`       |
-| `chore/`     | 🔧 설정 변경, 잡일              | `chore/#25`        |
-| `perf/`      | ⚡ 성능 개선                    | `perf/#94`        |
-| `hotfix/`    | 🚑 급한 수정 (main에서 바로 분기) | `hotfix/#102`          |
-| `test/`      | 🧪 테스트 코드 추가/수정        | `test/#55`    |
-
-<br>
-
-### 🚀 브랜치 흐름 요약
+## 📂 Project Structure
 
 ```text
-1. main ← 배포
-2. develop ← 통합 개발 (PR 대상)
-3. develop에서 feature/fix/... 브랜치 분기
-4. 기능 완료 후 develop으로 PR & 머지
-5. 배포 시 develop → main 머지
-6. 급한 수정은 hotfix에서 main → develop 병합
+📦 menu-ai
+├── Dockerfile
+├── main.py                # FastAPI 실행 엔트리포인트
+├── requirements.txt
+├── leftovers
+│   ├── core                # 설정, 에러 핸들러, 공통 응답, 외부 클라이언트
+│   └── domain
+│       ├── recommend       # 메뉴 추천 도메인
+│       │   ├── api/        # 추천 API
+│       │   ├── data/       # 원본 영양 데이터 (식약처 엑셀)
+│       │   ├── model_store # 학습된 모델 및 전처리 아티팩트
+│       │   ├── schemas/    # 요청/응답 스키마
+│       │   └── service/    # 추천 로직 (매칭, 스코어링, 전처리, 학습)
+│       └── tip             # 팁/레시피 도메인
+│           ├── api/        # Tip API
+│           ├── schemas/    # 요청/응답 스키마
+│           └── service/    # 프롬프트/LLM 호출
 ```
 
 ---
+
+## 🔬 데이터 파이프라인 & 알고리즘
+
+1. **데이터 로딩**
+
+   * 식약처 영양 데이터(`.xlsx`) 로드 -> 결측치 보정(Imputer) -> 정규화(Scaler)
+
+2. **메뉴명 매칭**
+
+   * TF-IDF 벡터화 -> TruncatedSVD 차원 축소 -> hnswlib 근접 탐색으로 유사 메뉴 검색
+
+3. **영양 피처화**
+
+   * `kcal, protein, fat, carbs, sugar, sodium` 등 주요 영양소를 벡터화
+
+4. **스코어링 (Concept Scoring)**
+
+   * 다이어트: 열량·당류·탄수화물 제한
+   * 저염: 나트륨 엄격 제한
+   * 혈당: 당류·탄수화물 동시 제한
+   * 저탄고지/벌크업: 기존 비율 유지
+
+5. **추천 결과 반환**
+
+   * 점수(0\~100) 기반 랭킹 → 상위 N개 반환
+   * 응답 구조: `isSuccess`, `httpStatus`, `data`, `timeStamp`
+
+---
+
+## ⚙️ 실행 방법
+
+### 1. 의존성 설치
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install --no-cache-dir -r requirements.txt
+```
+
+### 2. 학습 (모델 생성)
+
+최초 실행 시, `model_store/`가 비어 있다면 학습 과정이 필요합니다.
+
+```bash
+python -m leftovers.domain.recommend.service.train
+```
+
+→ `nutrition_imputer.joblib`, `nutrition_scaler.joblib`, `concept_model_*.joblib` 등이 생성됩니다.
+
+### 3. 서버 실행
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
+```

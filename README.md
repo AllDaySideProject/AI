@@ -33,10 +33,8 @@ FastAPI 기반의 **AI 추천 서버**로, 식약처 영양성분표 데이터�
 - **scikit-learn : 벡터화, 차원 축소, 스케일링, 결측치 보정**
 - **hnswlib : 근접 탐색 (메뉴명 유사도 매칭)**
 - **numpy / joblib : 수치 연산 및 모델 직렬화**
--**식약처 영양성분표 데이터 (Excel/CSV) : 영양 정보 기반 학습/추천**
   
-<img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white"/> <img src="https://img.shields.io/badge/hnswlib-333333?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/numpy-013243?style=flat-square&logo=numpy&logoColor=white"/> <img src="https://img.shields.io/badge/joblib-333333?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/%EC%8B%9D%EC%95%BD%EC%B2%98%20%EC%98%81%EC%96%91%EC%84%B1%EB%B6%84%ED%91%9C-0052CC?style=flat-square&logo=google-spreadsheet&logoColor=white"/>
-
+<img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white"/> <img src="https://img.shields.io/badge/hnswlib-333333?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/numpy-013243?style=flat-square&logo=numpy&logoColor=white"/> <img src="https://img.shields.io/badge/joblib-333333?style=flat-square&logo=python&logoColor=white"/> 
 
 ---
 
